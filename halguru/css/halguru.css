@@ -1,0 +1,23 @@
+body {
+    background: url("https://leverageedublog.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2020/06/12193010/MSc-Genetics.jpg");
+    background-size: cover;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+  }
+  #login .container #login-row #login-column #login-box {
+    margin-top: 120px;
+    max-width: 600px;
+    height: 460px;
+    border: 1px solid #413f3f;
+    background-color: #ffffff;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }

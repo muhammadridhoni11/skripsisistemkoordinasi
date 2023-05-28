@@ -1,0 +1,91 @@
+[{
+    "no" : "1",
+    "soal": "Bagian sel saraf yang berfungsi menghantarkan rangsangan dari badan sel adalah ....",
+    "a": "a. Akson",
+    "b": "b. Dendrite",
+    "c": "c. Badan sel",
+    "d": "d. Synapsis",
+    "e": "e. Selubung myelin",
+    "benar": "a"
+},{
+    "no" : "2",
+    "soal":	" Sel saraf yang memiliki fungsi rangsangannya menyampaikan ke pusat reseptor merupakan tugas dari saraf",
+    "a": "a. sereberum",
+    "b": "b. synapsis",
+    "c": "c. akson",
+    "d": "d. somatic",
+    "e": "e. medula",
+    "benar": "d"
+},{
+    "no" : "3",
+    "soal":	"Aktivitas saraf pada organ tubuh di bawah ini sebagai berikut!<br>1. bersin</br><br>2. berlari</br><br>3. berenang</br><br>4. batuk</br><br>5. berkedip</br>Di bawah ini yang termasuk merupakan gerak refleks kecuali...",
+    "a": "a. 1 dan 2",
+    "b": "b. 3 dan 1",
+    "c": "c. 4 dan 5",
+    "d": "d. 5 dan 1",
+    "e": "e. 2 dan 3",
+    "benar": "e"
+},{
+    "no" : "4",
+    "soal":	"<img src='img/quiz4.jpg'><br> bagian otak yang terletak di antara lobus frontalis dan lobus oksipitalis, fungsinya sebagai pusat sensasi dan bicara dapat dilihat pada bagian...",
+    "a": "a. Medulla oblongata",
+    "b": "b. Lobus parientalis",
+    "c": "c. Lobus Oksipitalis",
+    "d": "d. Sereberum",
+    "e": "e. Lobus medulla",
+    "benar": "b"
+},{
+    "no" : "5",
+    "soal":	"yang merupakan bagian dari system saraf pusat adalah...",
+    "a": "a. otak",
+    "b": "b. kulit",
+    "c": "c. hormone",
+    "d": "d. lidah",
+    "e": "e. kulit",
+    "benar": "a"
+},{
+    "no" : "6",
+    "soal":	" Pada bagian otak besar terdapat bagian yang berfungsi mengendalikan aktivitas mental dan gerakan otot adalah...",
+    "a": "a. Lobus Cereberum",
+    "b": "b. Lobus parientalis",
+    "c": "c. Lobus Oksipitalis",
+    "d": "d. Lobus frontalis",
+    "e": "e. Lobus temporaris",
+    "benar": "d"
+},{
+    "no" : "7",
+    "soal":	"System saraf yang rangsangannya tidak disampaikan ke otak adalah...",
+    "a": "a. System saraf tidak sadar",
+    "b": "b. System saraf sadar",
+    "c": "c. System saraf simpetik",
+    "d": "d. System saraf neuron",
+    "e": "e. System saraf medula",
+    "benar": "a"
+},{
+    "no" : "8",
+    "soal":	"terletak tepat di bawah talamus dan berperan dalam pemeliharaan keseimbangan dinamis tubuh dengan pengendalian tertentu, misalnya nafsu makan, tidur, suhu tubuh, dan keseimbangan cairan tubuh merupakan penjelasan dari...",
+    "a": "a. thalamus",
+    "b": "b. otak tengah",
+    "c": "c. otak kecil",
+    "d": "d. hipotalamus",
+    "e": "e. cereberum",
+    "benar": "d"
+},{
+    "no" : "9",
+    "soal":	" saraf yang fungsinya rangsangannya disampaikan ke pusat reseptor yaitu kepusat motoris pada serebrum adalah...",
+    "a": "a. System saraf sadar",
+    "b": "b. System saraf tidak sadar",
+    "c": "c. System saraf neuron",
+    "d": "d. System saraf kecil",
+    "e": "e. System saraf tengah",
+    "benar": "a"
+},{
+    "no" : "10",
+    "soal":	" berfungsi sebagai penghubung impuls dari atau ke otak dan memberi kemungkinan jalan terpendek pada gerak refleks disebut...",
+    "a": "a. susmsum tulang belakang",
+    "b": "b. cereberum",
+    "c": "c. otak besar",
+    "d": "d. neuron",
+    "e": "e. lobus oksipitalis",
+    "benar": "a"
+}]

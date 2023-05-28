@@ -1,0 +1,91 @@
+[{
+    "no" : "1",
+    "soal": "perhatikan gambar lidah di bawah ini!<br> <img src='img/quizno1.jpg'></br>Daerah yang diberi tanda X dan Y peka terhadap rasa?....",
+    "a": "a. asam dan manis",
+    "b": "b. pahit dan manis",
+    "c": "c. asin dan pahit",
+    "d": "d. manis dan asam",
+    "e": "e. manis pahit",
+    "benar": "e"
+},{
+    "no" : "2",
+    "soal":	" dibawah ini yang merupakan penerima rangsang cahaya adalah ...",
+    "a": "a. kemoreseptor",
+    "b": "b. fotoreseptor",
+    "c": "c. mekanireseptor",
+    "d": "d. thermoreseptor",
+    "e": "e. kalareseptor",
+    "benar": "b"
+},{
+    "no" : "3",
+    "soal":	"yang berperan menerima rangsang suhu dibawah ini adalah ...",
+    "a": "a. thermoreseptor",
+    "b": "b. kemoreseptor",
+    "c": "c. kalareseptor",
+    "d": "d. fotoreseptor",
+    "e": "e. mekanireseptor",
+    "benar": "a"
+},{
+    "no" : "4",
+    "soal":	"penerima reseptor pada hidung adalah...",
+    "a": "a. sel olfaktori",
+    "b": "b. sel korti",
+    "c": "c. sel kerucut",
+    "d": "d. sel saraf",
+    "e": "e. sel batang",
+    "benar": "a"
+},{
+    "no" : "5",
+    "soal":	"bagian telinga yang mempunyai fungsi sebagai penyeimbang tekanan udara pada tubuh adalah...",
+    "a": "a. telinga bagian dalam",
+    "b": "b. telinga bagian tengah",
+    "c": "c. telinga bagian luar",
+    "d": "d. daun telinga",
+    "e": "e. gendang telinga",
+    "benar": "b"
+},{
+    "no" : "6",
+    "soal":	"pigmen yang peka reseptor cahaya disebut juga dengan ...",
+    "a": "a. pupil",
+    "b": "b. neutron",
+    "c": "c. Lensa bagian tengah",
+    "d": "d. membrane",
+    "e": "e. redekson",
+    "benar": "e"
+},{
+    "no" : "7",
+    "soal":	"dibawah ini yang merupakan kelainan pada mata kecuali ...",
+    "a": "a. miopi",
+    "b": "b. astigmatisma",
+    "c": "c. hipermetropi",
+    "d": "d. alzheimer",
+    "e": "e. presbiopi",
+    "benar": "d"
+},{
+    "no" : "8",
+    "soal":	"bayangan benda yang dibentuk lensa mata tidak terfokus jatuh tepat pada retina, tetapi jatuh di belakang retina merupakan penjelasan dari kelainan mata yang biasa disebut juga dengan...",
+    "a": "a. miopi",
+    "b": "b. astigmatisma",
+    "c": "c. hipermetropi",
+    "d": "d. alzheimer",
+    "e": "e. presbiopi",
+    "benar": "c"
+},{
+    "no" : "9",
+    "soal":	"berfungsi menampung getaran dan meneruskannya ke telinga bagian tengah merupakan pengertian dari ...",
+    "a": "a. daun telinga bagian dalam",
+    "b": "b. telinga bagian luar",
+    "c": "c. telinga bagian tengah",
+    "d": "d. gendang telinga",
+    "e": "e. saluran telinga",
+    "benar": "a"
+},{
+    "no" : "10",
+    "soal":	"fungsi dari eustachius adalah ...",
+    "a": "a. menghubungkan telinga bagian tengah dan rongga mulut",
+    "b": "b. menghubungkan antara telinga luar dan koklea",
+    "c": "c. menghubungkan telinga bagian dalam dan telinga luar",
+    "d": "d. menghubungkan telinga bagian luar dan rongga mulut",
+    "e": "e. menghubungkan telinga bagian luar dan telinga bagian tengah",
+    "benar": "a"
+}]

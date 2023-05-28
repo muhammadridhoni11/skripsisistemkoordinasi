@@ -1,0 +1,32 @@
+.banner {
+	background: url("https://leverageedublog.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2020/06/12193010/MSc-Genetics.jpg");
+	background-size: cover;
+	padding-top: 20%;
+	padding-bottom: 20%;
+	color: #fff;
+  }
+.lingkaran {
+	display: inline-block;
+	border-radius: 50%;
+	width: 150px;
+	margin: auto;
+	height: 150px;
+	color: rgb(96, 186, 227);
+	background-color: rgb(52, 53, 53);
+}
+
+.lingkaran i {
+	position: relative;
+	top: 30px;
+}
+
+.content-card {
+	padding: 10px;
+	background: rgb(159, 228, 232);
+	width: auto;
+	font-size: 16px;
+	font-weight: 800;
+	border-radius: 15px;
+	color: rgb(14, 11, 11);
+	box-shadow: 0 0 10px #070707;
+  }

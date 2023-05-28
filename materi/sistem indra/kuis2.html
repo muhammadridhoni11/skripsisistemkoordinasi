@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sistem saraf pusat 2</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2a1b285329.js" 
+	crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" 
+  integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" 
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+  <link href="../../css/style.css" rel="stylesheet">
+
+  <style>
+    h1 {color:#00aeff}
+    
+    .card-header {
+        background-color: #0a1429;;
+        color: white;
+    }
+
+    hr {color: #000000;}
+
+    button.soall{
+        margin-bottom: 5px;
+        color :#001D3D;
+        width:50px;
+        font-size: 13px;
+    }
+
+    .aktif  {background-color: #1b263b;}
+
+    .belum{
+        background-color: white;
+    }
+
+    .sudah{
+        background-color: #BAD7E9;
+    }
+    </style>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBVu9bGsCkk_pcMwir7ipFOZyxhipFSRJU",
+  authDomain: "mediapembelajaran-b1356.firebaseapp.com",
+  databaseURL: "https://mediapembelajaran-b1356-default-rtdb.firebaseio.com",
+  projectId: "mediapembelajaran-b1356",
+  storageBucket: "mediapembelajaran-b1356.appspot.com",
+  messagingSenderId: "213250780073",
+  appId: "1:213250780073:web:4cbe1ed013cf1b4dc0b2b8",
+  measurementId: "G-FH4VCRVVC9"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    let database = firebase.database();
+
+    function lanjutsoal(){
+    
+    let cek = 0;
+
+    let isi_nama = document.getElementById('nama');
+    let isi_kelas = document.getElementById('kelas');
+    let isi_sekolah = document.getElementById('sekolah');
+
+    if(isi_nama.value != ""){
+        //alert("Lengkapi dulu identitas kamu");
+        isi_nama.classList.remove("belumterisi");
+        isi_nama = isi_nama.value;
+        cek = cek + 1;
+    } else {
+        isi_nama.classList.add("belumterisi");
+    }
+    
+    let kelasinput = "";
+    if(isi_kelas.value == "0"){
+        //alert("Lengkapi dulu identitas kamu");
+        isi_kelas.classList.add("belumterisi");
+    } else {
+        if(isi_kelas.value == "XA"){
+            kelasinput = "XI A";
+            cek = cek + 1;
+        }if(isi_kelas.value == "XB"){
+            kelasinput = "XI B";
+            cek = cek + 1;
+        }
+        isi_kelas.classList.remove("belumterisi");
+    }
+
+    let sekolahinput = "";
+    if(isi_sekolah.value == "0"){
+        //alert("Lengkapi dulu identitas kamu");
+        isi_sekolah.classList.add("belumterisi");
+    } else {
+        if(isi_sekolah.value == "1"){
+            sekolahinput = "SMA Negeri Banjarmasin";
+            cek = cek + 1;
+        }
+        isi_sekolah.classList.remove("belumterisi");
+    }
+
+    if (cek == 3){
+        localStorage.setItem("nama", isi_nama);
+        localStorage.setItem("kelas", kelasinput);
+        localStorage.setItem("sekolah", sekolahinput);
+
+        document.getElementById('soaltampiltampil').hidden = false;
+        document.getElementById('awalan').hidden = true;
+    } else {
+        alert("Lengkapi dulu identitas kamu");
+    }
+
+    // setting waktu kuis
+    countDownDate = new Date().getTime();
+           //waktu 30 menit
+           // countDownDate += 1801000;
+           //waktu 45 menit
+           // countDownDate += 2700000;
+           //waktu 20 menit
+           countDownDate += 1201000;
+           // countDownDate += 12000;
+           //15 detik
+           //countDownDate += 17000;
+           var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                    
+                // Perhitungan waktu untuk menit dan detik
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                if(minutes < 10){
+                        minutes = "0"+minutes;
+                }
+                if(seconds < 10){
+                        seconds = "0"+seconds;
+                }
+                document.getElementById("gwaktu").innerHTML ="<img src='img/time.png' style='width:10%'>";
+                document.getElementById("waktutampil").innerHTML = minutes + " : " + seconds;
+                
+                if (distance < 0) {
+                    clearInterval(x);
+                    waktuhabis = 1;
+                    document.getElementById("waktutampil").innerHTML = "Waktu Selesai";
+                }
+            }, 1000);
+
+        //let tampilnama = document.getElementById('namatampil');
+        // tampilnama.innerHTML = isi_nama;
+    
+}
+    
+
+let kunci = [];
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+                var data=JSON.parse(xhttp.responseText); 
+                
+                for (let i=0; i<data.length; i++) {
+                    let soalNomorr = data[i].no;
+                    let soalIsi = data[i].soal;
+                    let opsiA = data[i].a;
+                    let opsiB = data[i].b;
+                    let opsiC = data[i].c;
+                    let opsiD = data[i].d;
+                    let opsiE = data[i].e;
+                    let jwbanbenar = data[i].benar;
+
+                    // console.log(jwbanbenar);
+                    let nomorsoaltampil = document.querySelectorAll("#nomornyanih");
+                    nomorsoaltampil[i].innerHTML = soalNomorr;
+
+                    let soalTampil = document.querySelectorAll("#soal");
+                    soalTampil[i].innerHTML = soalIsi;
+
+                    let a = document.querySelectorAll('#a');
+                    a[i].innerHTML = opsiA;
+                    
+                    let b = document.querySelectorAll('#b');
+                    b[i].innerHTML = opsiB;
+                    
+                    let c = document.querySelectorAll('#c');
+                    c[i].innerHTML = opsiC;
+                    
+                    let d = document.querySelectorAll('#d');
+                    d[i].innerHTML = opsiD;
+
+                    let e = document.querySelectorAll('#e');
+                    e[i].innerHTML = opsiE;
+
+                    // let jwbnbnr = document.querySelectorAll('#benar');
+                    // jwbnbnr[i] = jwbanbenar;
+
+                    let benarni = data[i].benar;
+                    kunci.push(benarni);
+
+                    // const kunci = [jwbanbenar];
+                    // console.log(kunci);
+                };
+                //console.log(kunci);
+            }
+    };
+    //script import json
+    xhttp.open("GET", "kuis2.json", true);
+    xhttp.send();
+
+    function set1(){
+        let n1 = document.getElementById("nomor1");
+        n1.className = n1.className.replace(" belum"," sudah");
+    }
+
+    function set2(){
+        let n2 = document.getElementById("nomor2");
+        n2.className = n2.className.replace(" belum"," sudah");
+    }
+
+    function set3(){
+        let n3 = document.getElementById("nomor3");
+        n3.className = n3.className.replace(" belum"," sudah");
+    }
+
+    function set4(){
+        let n4 = document.getElementById("nomor4");
+        n4.className = n4.className.replace(" belum"," sudah");
+    }
+
+    function set5(){
+        let n5 = document.getElementById("nomor5");
+        n5.className = n5.className.replace(" belum"," sudah");
+    }
+
+    function set6(){
+        let n6 = document.getElementById("nomor6");
+        n6.className = n6.className.replace(" belum"," sudah");
+    }
+
+    function set7(){
+        let n7 = document.getElementById("nomor7");
+        n7.className = n7.className.replace(" belum"," sudah");
+    }
+
+    function set8(){
+        let n8 = document.getElementById("nomor8");
+        n8.className = n8.className.replace(" belum"," sudah");
+    }
+
+    function set9(){
+        let n9 = document.getElementById("nomor9");
+        n9.className = n9.className.replace(" belum"," sudah");
+    }
+
+    function set10(){
+        let n10 = document.getElementById("nomor10");
+        n10.className = n10.className.replace(" belum"," sudah");
+    }
+
+    function nomor1(){
+        document.getElementById("soal-1").hidden = false;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor2() {
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = false;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor3(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = false;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor4(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = false;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+   function nomor5(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = false;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor6(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = false;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor7(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = false;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor8(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = false;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor9(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = false;
+        document.getElementById("soal-10").hidden = true;
+    }
+    function nomor10(){
+        document.getElementById("soal-1").hidden = true;
+        document.getElementById("soal-2").hidden = true;
+        document.getElementById("soal-3").hidden = true;
+        document.getElementById("soal-4").hidden = true;
+        document.getElementById("soal-5").hidden = true;
+        document.getElementById("soal-6").hidden = true;
+        document.getElementById("soal-7").hidden = true;
+        document.getElementById("soal-8").hidden = true;
+        document.getElementById("soal-9").hidden = true;
+        document.getElementById("soal-10").hidden = false;
+    }
+</script>
+</head>
+
+
+
+</head>
+
+<body>
+
+  <!--tampilan header-->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <span class="d-none d-lg-block"><i class="fa-solid fa-dna"></i> Sistem Koordinasi</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+  </header>
+
+    <!-- tampilan sidebar-->
+    <aside id="sidebar" class="sidebar">
+
+      <ul class="sidebar-nav" id="sidebar-nav">    
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#list-nav" data-bs-toggle="collapse" href="#">
+            <i class="fa-solid fa-book"></i><span>Sistem Saraf</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="list-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="../../index.html">
+                <i class="bi bi-circle"></i><span>1.1 Struktur Sistem saraf</span>
+              </a>
+            </li>
+            <li>
+              <a href="../sistem saraf/sistemsarafpusat2.html">
+                <i class="bi bi-circle"></i><span>1.2 Sistem Saraf Pusat</span>
+              </a>
+            </li>
+            <li>
+              <a href="../sistem saraf/sistemsaraftepip2.html">
+                <i class="bi bi-circle"></i><span>1.3 Sistem saraf tepi</span>
+              </a>
+            </li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>Quiz</span>
+          </a>
+        </li>
+      </ul>
+  
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#list2-nav" data-bs-toggle="collapse" href="#">
+            <i class="fa-solid fa-book"></i><span>Sistem Indra</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="list2-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="../sistem indra/sistemindraperasap1.html">
+                <i class="bi bi-circle"></i><span>2.1 Indra Perasa</span>
+              </a>
+            </li>
+            <li>
+              <a href="../sistem indra/sistemindrapengecap1.html">
+                <i class="bi bi-circle"></i><span>2.2 Indra pengecap</span>
+              </a>
+            </li>
+            <li>
+            <a href="../sistem indra/sistemindrapenciuman1.html">
+              <i class="bi bi-circle"></i><span>2.3 Indra Penciuman</span>
+            </a>
+            </li>
+            <li>
+            <a href="../sistem indra/sistemindrapendengaran1.html">
+              <i class="bi bi-circle"></i><span>2.4 Indra pendengaran</span>
+            </a>
+            </li>
+            <li>
+            <a href="../sistem indra/sistemindrapenglihatan1.html">
+              <i class="bi bi-circle"></i><span>2.5 Indra penglihatan</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Quiz</span>
+            </a>
+          </li>        
+        </ul>
+
+      <li class="nav-item">
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#list3-nav" data-bs-toggle="collapse" href="#">
+            <i class="fa-solid fa-book"></i><span>Sistem endokrin</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="list3-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="../sistem endokrin/sistemendokrin1.html">
+                <i class="bi bi-circle"></i><span>3.1 sistem endokrin manusia</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="bi bi-circle"></i><span>Quiz</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " href="#">
+            <i class="fa-regular fa-square-check"></i>
+            <span>Evaluasi</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " href="#">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+          </a>
+        </li>
+  </aside>
+
+  <main id="main" class="main">
+    <section class="section dashboard">
+      <div class="content-card2">
+      <div id="layoutSidenav_content">
+        <main>
+            <!--Data Diri Siswa-->
+            <div class="container-fluid" id="awalan">
+                <div class="row">
+                    <h1 class="text-center mt-4" style="color:black;">Quiz sistem indra</h1>
+                    <hr>
+                    <div class="col-md-7 mt-2">
+                      <div class="card" style="border-radius: 10px; border:2px solid black;">
+                          <div class="card-header text-center" style="border-bottom-width: 2px; border-bottom-color: black; background-color: #BAD7E9; color:black;">
+                            <b>Petunjuk Kuis</b>
+                          </div>
+                          <div class="lh-lg card-body pb-5" style="text-align: justify; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 17px;">
+                            <ul>
+                                <li>Soal berupa pilihan ganda.</li>
+                                <li>durasi waktu pengerjaan sebanyak 20 menit</li>
+                                <li>setelah menjawab semua soal silahkan klik submit agar mengetahui skor dari kuis 2</li>
+                                <li>isi data diri sebelum mengerjakan soal, kemudian klik mulai kuis untuk memulai</li>
+                              </ul>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5 mt-2">
+                      <div class="card" style="border-radius: 10px; border:2px solid black;">
+                          <div class="card-header text-center" style="border-bottom-width: 2px; border-bottom-color: black; background-color: #BAD7E9; color:black;">
+                            <b>Data Diri Siswa</b>
+                          </div>
+                          <div class="card-body pb-3" style="text-align: justify; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 17px;">
+                            <form>
+                              <label for="nama" class="form-label">Nama Lengkap:</label>
+                              <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Lengkap">
+                              <label for="sekolah" class=" mt-1">Kelas:</label>
+                              <select class="form-select mt-1 mb-1" name="kelas" id="kelas">
+                                  <option value="0">Pilih Kelas</option>
+                                  <option value="XA">XI A</option>
+                                  <option value="XB">XI B</option>
+                              </select>
+                              <label for="sekolah" class=" mt-1">Sekolah:</label>
+                              <select class="form-select mt-1 mb-1" name="sekolah" id="sekolah">
+                                  <option value="0">Pilih Sekolah</option>
+                                  <option value="1">SMA Negeri </option>
+                              </select>
+                              <hr>
+                              <div class="text-center">
+                                  <button type="button" class="btn btn-secondary" button onclick="location.href='materiAlatUkur.html'" style="width:160px;">Kembali ke Materi</button>
+                                  <button type="button" class="btn btn-primary" style="width:160px;" onclick="lanjutsoal()">Mulai Kuis</button>
+                              </div>
+                            </form>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+            <!--Kuis 2-->
+            <div class="container-fluid" id="soaltampiltampil" hidden>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="container mt-2">
+                            <div class="card shadow bg-body rounded border-light">
+                                <div class="card-header border-light text-center">
+                                        <p class="mt-3"><b>KUIS 2</b></p>
+                                </div>
+                                <div class="card-body">
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-1">
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansatua" name="jawaban1" value="a" onclick="set1()">
+                                                    <label class="form-check-label cursor" for="jawabansatua">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansatub" name="jawaban1" value="b" onclick="set1()">
+                                                    <label class="form-check-label cursor" for="jawabansatub">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansatuc" name="jawaban1" value="c" onclick="set1()">
+                                                    <label class="form-check-label cursor" for="jawabansatuc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansatud" name="jawaban1" value="d" onclick="set1()">
+                                                    <label class="form-check-label cursor" for="jawabansatud">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansatue" name="jawaban1" value="e" onclick="set1()">
+                                                    <label class="form-check-label cursor" for="jawabansatue">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white disabled"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" id="lanjut2" onclick="nomor2()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-2" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanduaa" name="jawaban2" value="a" onclick="set2()">
+                                                    <label class="form-check-label cursor" for="jawabanduaa">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanduab" name="jawaban2" value="b" onclick="set2()">
+                                                    <label class="form-check-label cursor" for="jawabanduab">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanduac" name="jawaban2" value="c" onclick="set2()">
+                                                    <label class="form-check-label cursor" for="jawabanduac" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanduad" name="jawaban2" value="d" onclick="set2()">
+                                                    <label class="form-check-label cursor" for="jawabanduad">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanduae" name="jawaban2" value="e" onclick="set2()">
+                                                    <label class="form-check-label cursor" for="jawabanduae">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor1()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor3()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-3" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantigaa" name="jawaban3" value="a" onclick="set3()">
+                                                    <label class="form-check-label cursor" for="jawabantigaa">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantigab" name="jawaban3" value="b" onclick="set3()">
+                                                    <label class="form-check-label cursor" for="jawabantigab">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantigac" name="jawaban3" value="c" onclick="set3()">
+                                                    <label class="form-check-label cursor" for="jawabantigac" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantigad" name="jawaban3" value="d" onclick="set3()">
+                                                    <label class="form-check-label cursor" for="jawabantigad">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantigae" name="jawaban3" value="e" onclick="set3()">
+                                                    <label class="form-check-label cursor" for="jawabantigae">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor2()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor4()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-4" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanempata" name="jawaban4" value="a" onclick="set4()">
+                                                    <label class="form-check-label cursor" for="jawabanempata">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanempatb" name="jawaban4" value="b" onclick="set4()">
+                                                    <label class="form-check-label cursor" for="jawabanempatb">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanempatc" name="jawaban4" value="c" onclick="set4()">
+                                                    <label class="form-check-label cursor" for="jawabanempatc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanempatd" name="jawaban4" value="d" onclick="set4()">
+                                                    <label class="form-check-label cursor" for="jawabanempatd">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanempate" name="jawaban4" value="e" onclick="set4()">
+                                                    <label class="form-check-label cursor" for="jawabanempate">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor3()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor5()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-5" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanlimaa" name="jawaban5" value="a" onclick="set5()">
+                                                    <label class="form-check-label cursor" for="jawabanlimaa">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanlimab" name="jawaban5" value="b" onclick="set5()">
+                                                    <label class="form-check-label cursor" for="jawabanlimab">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanlimac" name="jawaban5" value="c" onclick="set5()">
+                                                    <label class="form-check-label cursor" for="jawabanlimac" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanlimad" name="jawaban5" value="d" onclick="set5()">
+                                                    <label class="form-check-label cursor" for="jawabanlimad">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanlimae" name="jawaban5" value="e" onclick="set5()">
+                                                    <label class="form-check-label cursor" for="jawabanlimae">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor4()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor6()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-6" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanenama" name="jawaban6" value="a" onclick="set6()">
+                                                    <label class="form-check-label cursor" for="jawabanenama">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanenamb" name="jawaban6" value="b" onclick="set6()">
+                                                    <label class="form-check-label cursor" for="jawabanenamb">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanenamc" name="jawaban6" value="c" onclick="set6()">
+                                                    <label class="form-check-label cursor" for="jawabanenamc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanenamd" name="jawaban6" value="d" onclick="set6()">
+                                                    <label class="form-check-label cursor" for="jawabanenamd">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabanename" name="jawaban6" value="e" onclick="set6()">
+                                                    <label class="form-check-label cursor" for="jawabanename">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor5()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor7()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-7" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantujuha" name="jawaban7" value="a" onclick="set7()">
+                                                    <label class="form-check-label cursor" for="jawabantujuha">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantujuhb" name="jawaban7" value="b" onclick="set7()">
+                                                    <label class="form-check-label cursor" for="jawabantujuhb">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantujuhc" name="jawaban7" value="c" onclick="set7()">
+                                                    <label class="form-check-label cursor" for="jawabantujuhc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantujuhd" name="jawaban7" value="d" onclick="set7()">
+                                                    <label class="form-check-label cursor" for="jawabantujuhd">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabantujuhe" name="jawaban7" value="e" onclick="set7()">
+                                                    <label class="form-check-label cursor" for="jawabantujuhe">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor6()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor8()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-8" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabandelapana" name="jawaban8" value="a" onclick="set8()">
+                                                    <label class="form-check-label cursor" for="jawabandelapana">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabandelapanb" name="jawaban8" value="b" onclick="set8()">
+                                                    <label class="form-check-label cursor" for="jawabandelapanb">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabandelapanc" name="jawaban8" value="c" onclick="set8()">
+                                                    <label class="form-check-label cursor" for="jawabandelapanc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabandelapand" name="jawaban8" value="d" onclick="set8()">
+                                                    <label class="form-check-label cursor" for="jawabandelapand">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabandelapane" name="jawaban8" value="e" onclick="set8()">
+                                                    <label class="form-check-label cursor" for="jawabandelapane">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor7()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor9()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-9" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansembilana" name="jawaban9" value="a" onclick="set9()">
+                                                    <label class="form-check-label cursor" for="jawabansembilana">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansembilanb" name="jawaban9" value="b" onclick="set9()">
+                                                    <label class="form-check-label cursor" for="jawabansembilanb">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansembilanc" name="jawaban9" value="c" onclick="set9()">
+                                                    <label class="form-check-label cursor" for="jawabansembilanc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansembiland" name="jawaban9" value="d" onclick="set9()">
+                                                    <label class="form-check-label cursor" for="jawabansembiland">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansembilane" name="jawaban9" value="e" onclick="set9()">
+                                                    <label class="form-check-label cursor" for="jawabansembilane">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor8()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white" onclick="nomor10()">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--soal-->
+                                    <div class="bag-kuis" id="soal-10" hidden>
+                                        <div><p><img src="img/soal.png" style="width:25px;"/><b>&nbsp;Nomor&nbsp;<span id="nomornyanih"></span></b></p>
+                                        </div>
+                                        <div class="soallll scrollkonten">
+                                            <p>
+                                                <span id="soal">
+                                            </p>
+                                    <!--Jawaban-->
+                                            <div class="soalsoal" style="margin-left:2%">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansepuluha" name="jawaban10" value="a" onclick="set10()">
+                                                    <label class="form-check-label cursor" for="jawabansepuluha">
+                                                        <p id="a"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansepuluhb" name="jawaban10" value="b" onclick="set10()">
+                                                    <label class="form-check-label cursor" for="jawabansepuluhb">
+                                                        <p id="b"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansepuluhc" name="jawaban10" value="c" onclick="set10()">
+                                                    <label class="form-check-label cursor" for="jawabansepuluhc" >
+                                                        <p id="c"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansepuluhd" name="jawaban10" value="d" onclick="set10()">
+                                                    <label class="form-check-label cursor" for="jawabansepuluhd">
+                                                        <p id="d"></p>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="jawabansepuluhe" name="jawaban10" value="e" onclick="set10()">
+                                                    <label class="form-check-label cursor" for="jawabansepuluhe">
+                                                        <p id="e"></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning text-white" onclick="nomor9()"><i class="fa-sharp fa-solid fa-backward-step"></i> Sebelumnya</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-warning float-end text-white disabled">Selanjutnya <i class="fa-sharp fa-solid fa-forward-step"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="container mt-2">
+                            <div class="timer text-center">
+                                <h3>
+                                    <span id="gwaktu"><img src='img/soal.png' style='width:10%'></span> 
+                                    <span id="waktutampil">20 : 00</span>
+                                </h3>
+                                <!-- <h3 id="waktutampil" class="text-center m-2"></h3> -->
+                            </div>
+                            <div class="card shadow border-light">
+                                <div class="card-header border-light text-center"><b>Nomor Soal</b></div>
+                                <div class="card-body">
+                                <center>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor1" onclick="nomor1()">1</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor2" onclick="nomor2()">2</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor3" onclick="nomor3()">3</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor4" onclick="nomor4()">4</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor5" onclick="nomor5()">5</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor6" onclick="nomor6()">6</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor7" onclick="nomor7()">7</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor8" onclick="nomor8()">8</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor9" onclick="nomor9()">9</button>
+                                    <button type="button" class="soall btn btn-outline-secondary belum" id="nomor10" onclick="nomor10()">10</button>
+                                </center>
+                                <br>
+                                <p>Keterangan:</p>
+                                <p><span class="btn p-1" style="background-color: rgb(255, 0, 0); width: 30%; border: 1px solid grey;">Merah </span> = Belum terjawab</p>
+                                <p><span class="btn p-1" style="color:white;background-color:#25d24e; width: 30%; border: 1px solid grey;">Hijau </span> = Sudah terjawab</p>  
+                                <p><a class="btn p-1" style="color:white; background-color:#0a1429; width: 100%; border-radius: 10px;"  data-bs-toggle="modal" data-bs-target="#exampleModal"><b style="font-weight :100px;font-size: larger;">Selesai</b></a></p>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+
+            <!-- Dialog Kuis -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                        Apakah kamu yakin ingin menyelesaikan kuis 2?
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="selesai()">Yakin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tampilan Hasil Skor -->
+            <div class="container-fluid p-2 mt-5" id="bgskor" hidden>
+                <center>
+                    <div class="col-md-8 mt-5 datakuis">
+                    <div class="card" style="border-radius:10px;border:2px solid black;">
+                        <div class="card-header text-center" style="border-bottom-width: 2px; border-bottom-color: black;background-color: #BAD7E9; color:black;">
+                          <h5>HASIL KUIS</h5>
+                        </div>
+                        <div class="lh-lg card-body p-5" style="text-align: justify;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: 17px;">
+                            <table class="table-borderless">
+                                <tr>
+                                    <td><p>Nama</p></td>
+                                    <td><p style="margin-left: 25px;"> : </p></td>
+                                    <td><p class="nama" style="margin-left: 15px;"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p> Sekolah</p></td>
+                                    <td><p style="margin-left: 25px;">: </p></td>
+                                    <td><p class="sekolah" style="margin-left: 15px;"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Kelas</p></td>
+                                    <td><p style="margin-left: 25px;"> : </p></td>
+                                    <td><p class="kelas" style="margin-left: 15px;"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Hari, Tanggal</p></td>
+                                    <td><p style="margin-left: 25px;"> : </p></td>
+                                    <td><p class="haritgl" style="margin-left: 15px;"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Waktu Selesai</p></td>
+                                    <td><p style="margin-left: 25px;"> : </p></td>
+                                    <td><p class="waktu" style="margin-left: 15px;"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Nilai Kuis 2</p></td>
+                                    <td><p style="margin-left: 25px;"> : </p></td>
+                                    <td><p class="hasilskor" style="margin-left: 15px;"></p></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+                        </center>
+                        <center>
+                            <div id="ulang" class="mt-1" hidden>
+                                <p>Nilai kamu kurang dari KKM yang ditentukan yaitu 70 tidak, silahkan pelajari materi lagi untuk meningkatkan skor kamu agar memenuhi KKM<img src="img/sed.png" width="3%" height="3%"></img></p>
+                                <p>Silahkan kamu pelajari ulang materi serta kuis<img src="img/happ.png" width="3%" height="3%"></img></p>
+                                <a class="btn btn-danger mt-1" button onclick="location.href='kuis2.html'">Ulang</a>
+                                <a class="btn btn-primary mt-1" button onclick="location.href='../sistem endokrin/sistem endokrin1.html'">materi selanjutnya</a>
+                            </div>
+                            <div id="lulus" hidden>
+                                <p>Yay! Nilai kamu memenuhi KKM, silahkan melanjutkan ke materi selanjutnya!<img src="img/sed.png" width="3%" height="3%"></p>
+                                <a class="btn btn-success mt-2" button onclick="location.href='../sistem endokrin/sistem endokrin1.html'">Materi Selanjutnya</a>
+                            </div>
+                        </center>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script>
+    let waktuhabis = 0;
+                
+               
+    var d = new Date();
+    var t = d.getTime();
+    var id = t;
+
+    window.setTimeout("waktu()", 1000);
+    
+    function waktu() {
+        var tanggal = new Date();
+        setTimeout("waktu()", 1000);
+        return (tanggal.getHours() + ":" + tanggal.getMinutes() + ":" + tanggal.getSeconds());
+    }
+   
+    // harinya
+    function hari() {
+        tanggallengkap = new String();
+        namahari = ("Minggu Senin Selasa Rabu Kamis Jumat Sabtu");
+        namahari = namahari.split(" ");
+        namabulan = ("Januari Februari Maret April Mei Juni Juli Agustus September Oktober November Desember");
+        namabulan = namabulan.split(" ");
+        tgl = new Date();
+        hari = tgl.getDay();
+        tanggal = tgl.getDate();
+        bulan = tgl.getMonth();
+        tahun = tgl.getFullYear();
+        tanggallengkap = namahari[hari] + ", " + tanggal + " " + namabulan[bulan] + " " + tahun;
+        return (tanggallengkap);
+    }
+
+    // Fungsi Waktu Habis
+    var xx = setInterval(function() {
+        if(waktuhabis==1){
+            clearInterval(xx);
+            
+        let isi = 0;
+        let pilsiswainput = [];
+        
+        let pilsiswa = document.getElementsByTagName("input");
+
+        for(let x=0; x<pilsiswa.length;x++){
+            if(pilsiswa[x].checked) {
+                pilsiswainput.push(pilsiswa[x].value);
+            } else {
+
+            }
+            localStorage.setItem("jwbn", pilsiswainput);
+        }    
+            
+            console.log("no");
+            document.getElementById('bgskor').hidden = false;
+            document.getElementById('soaltampiltampil').hidden = true;
+            //var skorr = document.getElementById('bgskor');
+            // skorr.className = skorr.className.replace(" hilang","")
+            // document.getElementById('soaltampiltampil').className += " hilang";
+
+                let hasil = 0;
+                let benar = 0;
+                let salah = kunci.length;
+                for (let u = 0; u < pilsiswainput.length; u++) {
+                    if(pilsiswainput[u] == kunci[u]){
+                        hasil = hasil + 10;
+                        benar = benar + 1;
+                    } else {
+                    hasil = hasil;
+                }
+            }
+            console.log(hasil);
+            //nilai disimpan ke local storage
+            localStorage.setItem("skor",hasil);
+            
+            let waktuselesai = waktu();
+            let hariselesai = hari();
+
+            let nama = document.querySelector(".nama");
+            let namasiswa = localStorage.getItem("nama").toUpperCase();
+            nama.innerHTML = namasiswa;
+
+            let kelas = document.querySelector(".kelas");
+            let kelassiswa = localStorage.getItem("kelas");
+            kelas.innerHTML = kelassiswa;
+
+            let sekolah = document.querySelector(".sekolah");
+            let sekolahsiswa = localStorage.getItem("sekolah");
+            sekolah.innerHTML = sekolahsiswa;
+
+            let waktuu = document.querySelector('.waktu');
+            waktuu.innerHTML = waktuselesai;
+
+            let harii = document.querySelector('.haritgl');
+            harii.innerHTML = hariselesai;
+
+            let jwbansiswa = localStorage.getItem("jwbn");
+
+            let hslskor = document.querySelector('.hasilskor');
+            let skorsiswa = localStorage.getItem("skor");
+            hslskor.innerHTML = skorsiswa;
+
+            if (skorsiswa < 70){
+                
+                document.getElementById('ulang').hidden = false;
+                // var ulangg = document.querySelector('.ket_ulang');
+                // ulangg.className = ulangg.className.replace(" hilang","");
+                
+            } else if (skorsiswa >= 70) {
+                document.getElementById('lulus').hidden = false;
+                //var materilanjut = document.querySelector('.tmblmatlan');
+                //materilanjut.className = materilanjut.className.replace(" hilang"," ");
+            }
+
+            createTask(namasiswa, kelassiswa, sekolahsiswa, hariselesai, waktuselesai, pilsiswainput, skorsiswa);
+        }
+    }, 1000);
+
+   function selesai(){
+        let syaratselesai = 0;
+        let isi = 0;
+        let pilsiswainput = [];
+        
+        let pilsiswa = document.getElementsByTagName("input");
+        let alertnyaa = document.querySelector(".modal");
+        let soalnomor = document.querySelectorAll('.soall');
+
+        for(let c=0; c < soalnomor.length; c++){
+            if ((soalnomor[c].className.indexOf('belum') == -1)) {
+                    syaratselesai = syaratselesai + 1;
+            }
+        }
+
+
+        if(syaratselesai != kunci.length){
+            alert("Masih ada soal yang belum terjawab, periksa kembali!");
+        } else {
+                
+            for(let x=0; x<pilsiswa.length;x++){
+            if(pilsiswa[x].checked) {
+                pilsiswainput.push(pilsiswa[x].value);
+            } else {
+
+            }
+            localStorage.setItem("jwbn", pilsiswainput);
+            }    
+            
+            console.log("yes");
+
+                let hasil = 0;
+                let benar = 0;
+                let salah = kunci.length;
+                for (let u = 0; u < pilsiswainput.length; u++) {
+                    if(pilsiswainput[u] == kunci[u]){
+                        hasil = hasil + 10;
+                        benar = benar + 1;
+                    } else {
+                    hasil = hasil;
+                }
+            }
+            console.log(hasil);
+            //nilai disimpan ke local storage
+            localStorage.setItem("skor",hasil);
+
+            // var skorr = document.getElementById('bgskor');
+            // skorr.className = skorr.className.replace(" hilang","");
+
+            document.getElementById('bgskor').hidden = false;
+            document.getElementById('soaltampiltampil').hidden = true;
+
+            // document.getElementById('soaltampiltampil').className += " hilang";
+            let waktuselesai = waktu();
+            let hariselesai = hari();
+
+            let nama = document.querySelector(".nama");
+            let namasiswa = localStorage.getItem("nama").toUpperCase();
+            nama.innerHTML = namasiswa;
+
+            let kelas = document.querySelector(".kelas");
+            let kelassiswa = localStorage.getItem("kelas");
+            kelas.innerHTML = kelassiswa;
+
+            let sekolah = document.querySelector(".sekolah");
+            let sekolahsiswa = localStorage.getItem("sekolah");
+            sekolah.innerHTML = sekolahsiswa;
+
+            let waktuu = document.querySelector('.waktu');
+            waktuu.innerHTML = waktuselesai;
+
+            let harii = document.querySelector('.haritgl');
+            harii.innerHTML = hariselesai;
+
+            let jwbansiswa = localStorage.getItem("jwbn");
+
+            let hslskor = document.querySelector('.hasilskor');
+            let skorsiswa = localStorage.getItem("skor");
+            hslskor.innerHTML = skorsiswa;
+
+            if (skorsiswa < 70){
+                
+                document.getElementById('ulang').hidden = false;
+                // var ulangg = document.querySelector('.ket_ulang');
+                // ulangg.className = ulangg.className.replace(" hilang","");
+                
+            } else if (skorsiswa >= 70) {
+                document.getElementById('lulus').hidden = false;
+                //var materilanjut = document.querySelector('.tmblmatlan');
+                //materilanjut.className = materilanjut.className.replace(" hilang"," ");
+            }
+
+            createTask(namasiswa, kelassiswa, sekolahsiswa, hariselesai, waktuselesai, pilsiswainput, skorsiswa);
+            }
+
+        }
+
+        function createTask(namasiswa, kelassiswa, sekolahsiswa, hariselesai, waktuselesai, jwbansiswa, skorsiswa){
+            id += 1;
+
+            var datakuis2 = {
+                id : id,
+                nama : namasiswa,
+                kelas : kelassiswa,
+                sekolah : sekolahsiswa,
+                hari : hariselesai,
+                jam : waktuselesai,
+                jawab  : jwbansiswa,
+                nilai : skorsiswa
+            }
+
+            var ref = database.ref("kuis2/" + id);
+            ref.set(datakuis2);
+        }
+</script>
+
+      </main>
+       
+
+  <!--footer-->
+  <div class="footer-nav">
+    <a href="sistemindrapenglihatan1.html" class="footer-number">Sebelumnya</a>
+    <a href="kuis2.html" class="footer-number">7</a>
+    <a href="../sistem endokrin/sistemendokrin1.html" class="footer-number">Selanjutnya</a>
+</div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+  crossorigin="anonymous"></script>
+        <!-- script main-->
+
+   <!-- Bootstrap core JavaScript-->
+   <script src="../../materi/sistem saraf/assets/vendor/jquery/jquery.min.js"></script>
+   <script src="../../materi/sistem saraf/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        
+  <script src="../../js/main.js"></script>
+</body>
+
+</html>

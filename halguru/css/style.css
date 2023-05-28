@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: rgb(135, 203, 185);
+  color: #060606;
+}
+
+a {
+  color: #f2eaeb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #08080a;
+  text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+# Main
+--------------------------------------------------------------*/
+#main {
+  margin-top: 60px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+
+.header {
+  transition: all 0.5s;
+  z-index: 997;
+  height: 60px;
+  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+  background-color: #262626;
+  padding-left: 20px;
+  font-family: "fantasy";
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+
+.header .toggle-sidebar-btn {
+  font-size: 25px;
+  padding-left: 30px;
+  cursor: pointer;
+  color: #f5f3f3;
+}
+
+
+/*--------------------------------------------------------------
+# Sidebar
+--------------------------------------------------------------*/
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #060607 transparent;
+  box-shadow: 0px 0px 20px rgba(11, 11, 12, 0.1);
+  background-color: rgb(185, 237, 221);
+  border-radius: 10px;
+}
+
+@media (max-width: 1199px) {
+  .sidebar {
+    left: -300px;
+  }
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #e9e1e1;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #aab7cf;
+}
+
+@media (min-width: 1200px) {
+
+  #main,
+  #footer {
+    margin-left: 300px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .toggle-sidebar .sidebar {
+    left: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .toggle-sidebar #main,
+  .toggle-sidebar #footer {
+    margin-left: 0;
+  }
+
+  .toggle-sidebar .sidebar {
+    left: -300px;
+  }
+}
+
+.sidebar-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 5px;
+}
+
+.sidebar-nav .nav-heading {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: 600;
+  margin: 10px 0 5px 15px;
+}
+
+.sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #080808;
+  transition: 0.3;
+  background: #e8e9ed;
+  padding: 20px 25px;
+  border-radius: 10px;
+}
+
+.sidebar-nav .nav-link i {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #8e8f95;
+}
+
+
+.sidebar-nav .nav-link:hover i {
+  color: #000000;
+}
+
+.sidebar-nav .nav-link .bi-chevron-down {
+  margin-right: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
+  transform: rotate(180deg);
+}
+
+.sidebar-nav .nav-content {
+  padding: 5px 0 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-nav .nav-content a {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #080808;
+  background: #e8e9ed;
+  padding: 10px 40px;
+  transition: 0.3s;
+}
+
+.sidebar-nav .nav-content a i {
+  font-size: 10px;
+  margin-right: 8px;
+  line-height: 0;
+  border-radius: 50%;
+}
+
+.sidebar-nav .nav-content a:hover,
+.sidebar-nav .nav-content a.active {
+  color: #313132;
+}
+
+.card-header-2 {
+  padding: 10px;
+  background: rgb(116, 103, 80);
+  width: fit-content;
+  font-size: 16px;
+  font-weight: 800;
+  border-radius: 10px 5px 0 0;
+  color: white;
+}
+
+
+.content-card {
+  background: white;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 10px;
+  border: 5px solid rgb(160, 160, 160);
+  border-radius: 20px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.content-card2 {
+  background: white;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 10px;
+  border: 2px dashed rgb(160, 160, 160);
+  border-radius: 20px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.dragdrop{
+  border: 1px solid rgb(255, 255, 255); 
+  width:100%;
+  height: 40px;
+  background-color: #52aa5e;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  padding-top: 5px;
+  color:rgb(255, 255, 255);
+  border-radius: 5px;
+  font-size: 85%;
+  font-weight: bold;
+}
+
+p {padding-top: 10px;}
+
+.footer-nav {
+  padding: 1px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.footer-number {
+  text-decoration: none;
+  background: #161615;
+  font-size: 20px;
+  color: white;
+  padding: 8px;
+}
+
+.footer-number:hover {
+  background: rgb(55, 51, 47);
+  color: white;
+}
+
